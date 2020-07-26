@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %} Bhavanites : Poll question {% endblock title %}
+
+{% block content %}
+
+<h1 class = "mt-5 ">{{ question.question_text}}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form class = "mt-4" action = "{%url 'polls:vote' question.id %}" method = "post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+  <input type = 'radio' name = 'choice' id = 'choice{{forloop.counter}}' value = '{{choice.id}}'>
+  <label for = 'choice{{forloop.counter}}'>{{choice.choice_text}}</label><br>
+{% endfor %}
+<button type = "submit" class = "btn btn-success mt-3">Vote</button>
+</form>
+
+{% endblock content %}
+

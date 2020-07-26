@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Bhavanites : Poll results {% endblock title %}
+
+{% block content %}
+<h1 class = "mt-5">{{ question.question_text }}</h1>
+
+
+{% for choice in question.choice_set.all %}
+  <strong>{{ choice.choice_text }}</strong>
+  <div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:{{choice.percentage}}%">{{choice.percentage}}%</div>
+  </div>
+{% endfor %}
+
+
+{% endblock content %}
+
